@@ -5,6 +5,8 @@ const { consoleLogMiddleware, fileLogMiddleware } = require('./middleware.js')
 
 const hbs = require('hbs')
 hbs.registerPartials(path.join(__dirname, 'views', 'partials'))
+hbs.registerHelper('getCurrentYear', () => new Date().getFullYear())
+hbs.registerHelper('getAuthor', () => 'Abel Marco')
 app.set('view engine', 'hbs') // clave valor
 
 const port = 3000
@@ -19,16 +21,12 @@ app.get('/home', (req, res) => {
   res.render('home', {
     pageTitle: 'Mi Web',
     siteWeb: 'Bienvenidos a la web de',
-    pageBody: 'Esta es mi página personal',
-    currentYear: new Date().getFullYear(),
-    author: 'Abel Marco'
+    pageBody: 'Esta es mi página personal'
   })
 })
 app.get('/contactar', (req, res) => {
   res.render('contactar', {
-    pageTitle: 'Contactar',
-    currentYear: new Date().getFullYear(),
-    author: 'Abel Marco'
+    pageTitle: 'Contactar'
   })
 })
 app.listen(port, () => console.log(`Se ha levantado servidor en el puerto ${port}`))
